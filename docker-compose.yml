@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgres:15
+    container_name: bookly_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bookly_db
+    ports:
+      - "5433:5432"  # External port 5433 maps to internal port 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+

@@ -1,0 +1,72 @@
+# ======================================
+# 📦 General
+# ======================================
+.DS_Store
+Thumbs.db
+*.log
+*.env
+.env.local
+.env.*.local
+node_modules/
+dist/
+build/
+coverage/
+tmp/
+temp/
+.pnpm-store
+
+# ======================================
+# 🧰 Editor configs
+# ======================================
+.vscode/
+.idea/
+*.swp
+
+# ======================================
+# ⚙️ Next.js / React frontend
+# ======================================
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.next-cache/
+*.tsbuildinfo
+
+# ======================================
+# 🧱 Express backend
+# ======================================
+logs/
+prisma/dev.db
+prisma/dev.db-journal
+
+# ======================================
+# 📱 Flutter app
+# ======================================
+**/build/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.packages
+**/.pub-cache/
+**/.pub/
+**/generated_plugin_registrant.dart
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Generated.xcconfig
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/android/.gradle/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+
+# ======================================
+# 🐳 Docker
+# ======================================
+docker-compose.override.yml
+.env.docker
+*.pid
+*.seed
+

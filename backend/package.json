@@ -1,0 +1,49 @@
+{
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.19",
+    "@types/emscripten": "^1.41.5",
+    "@types/express": "^5.0.3",
+    "@types/heic-convert": "^2.1.0",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^24.1.0",
+    "@types/sharp": "^0.31.1",
+    "prisma": "^6.13.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "heic-convert": "^2.1.0",
+    "javascript-barcode-reader": "^1.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.1.1",
+    "sharp": "^0.34.5",
+    "zxing-wasm": "^3.0.2"
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "db:seed": "ts-node prisma/seed.ts",
+    "db:seed:books": "ts-node prisma/seedBooks.ts",
+    "db:reset": "docker compose -f ../docker-compose.yml up -d && node -e \"const d=Date.now(); while(Date.now()-d<5000);\" && npx prisma migrate reset --force --skip-seed",
+    "db:reset:no-docker": "npx prisma migrate reset --force --skip-seed",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

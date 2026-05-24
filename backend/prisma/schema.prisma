@@ -1,0 +1,93 @@
+// This is your Prisma schema file, learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String
+  surname      String
+  password     String // hashed later
+  role         UserRole @default(User)
+  createdAt    DateTime @default(now())
+  libraryEntries UserLibrary[]
+  createdBooks Book[]   @relation("CreatedBooks")
+
+  @@map("users")
+}
+
+enum UserRole {
+  Admin
+  User
+}
+
+enum LibraryStatus {
+  TO_READ
+  READ
+}
+
+model Book {
+  id             String      @id @default(uuid())
+  ISBN           String?     @unique
+  title          String
+  subtitle       String?
+  publisher      String?
+  published_date DateTime?
+  page_count     Int?
+  language       String?
+  genres         BookGenre[]
+  description    String? // user provided description
+  cover_url      String?
+  authors        String[] // array of author names as strings
+
+  // Timestamps
+  created_at DateTime  @default(now())
+  updated_at DateTime?
+
+  // Relations
+  created_by_id String
+  created_by    User          @relation("CreatedBooks", fields: [created_by_id], references: [id])
+  libraryEntries UserLibrary[]
+}
+
+model UserLibrary {
+  userId    String
+  bookId    String
+  status    LibraryStatus @default(TO_READ)
+  createdAt DateTime      @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@id([userId, bookId])
+  @@index([bookId])
+}
+
+enum BookGenre {
+  Fiction
+  NonFiction
+  Fantasy
+  SciFi
+  Mystery
+  Romance
+  Thriller
+  Biography
+  History
+  SelfHelp
+  Children
+  Adventure
+  Horror
+  Classics
+  Poetry
+  GraphicNovel
+}
